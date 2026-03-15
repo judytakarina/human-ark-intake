@@ -6,7 +6,7 @@ const GOLD = "#C9A84C";
 const CREAM = "#FAF7F2";
 
 const HumanArkLogo = () => (
-    <img src="/IMG_0004.jpeg" alt="Human Ark" style={{ width: "70px", height: "auto" }} />
+    <img src="/IMG_0004.jpeg" alt="Human Ark" style={{ width: "120px", height: "auto" }} />
 );
 
 const steps = [
@@ -89,7 +89,7 @@ export default function HumanArkIntake() {
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <HumanArkLogo />
           <div>
-            <div style={{ fontSize: "17px", fontWeight: "400", color: NAVY, letterSpacing: "0.18em", textTransform: "uppercase" }}>Human Ark</div>
+            <div style={{ fontSize: "17px", fontWeight: "400", color: NAVY, letterSpacing: "0.18em", textTransform: "uppercase" }}></div>
             <div style={{ fontSize: "11px", color: GOLD, letterSpacing: "0.12em", textTransform: "uppercase" }}>Venture Operator Network</div>
           </div>
         </div>
