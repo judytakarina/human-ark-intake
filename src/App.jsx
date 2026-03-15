@@ -51,3 +51,4 @@ const steps = [
         ]
   }
   ]
+export default App
