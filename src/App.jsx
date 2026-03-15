@@ -51,4 +51,5 @@ const steps = [
         ]
   }
   ]
+function App() {return "Human Ark Intake"}
 export default App
