@@ -51,5 +51,5 @@ const steps = [
         ]
   }
   ]
-function App() { return <div></div>Human Ark Intake</div> }
+function App() { return <div>Human Ark Intake</div> }
 export default App
