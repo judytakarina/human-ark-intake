@@ -45,6 +45,6 @@ const steps = [
     id: 4,
     label: "Outcome",
     question: "What outcome do you want this operator to deliver?",
-    subtitle: "\"In the next 12 months we want to achieve…\"",
+    subtitle: "In the next 12 months we want to achieve…",
     fields: [
       { name: "outcome", type: "text
