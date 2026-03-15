@@ -6,28 +6,7 @@ const GOLD = "#C9A84C";
 const CREAM = "#FAF7F2";
 
 const HumanArkLogo = () => (
-  <svg width="70" height="84" viewBox="0 0 70 84" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round">
-      <line x1="35" y1="2" x2="35" y2="11" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(30 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(60 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(90 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(120 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(150 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(180 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(210 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(240 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(270 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(300 35 35)" />
-      <line x1="35" y1="2" x2="35" y2="11" transform="rotate(330 35 35)" />
-    </g>
-    <circle cx="35" cy="35" r="4.5" stroke="#C9A84C" strokeWidth="2.2" fill="none" />
-    <line x1="35" y1="40" x2="35" y2="53" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="35" y1="44" x2="24" y2="38" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="35" y1="44" x2="46" y2="38" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="35" y1="53" x2="27" y2="64" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" />
-    <line x1="35" y1="53" x2="43" y2="64" stroke="#C9A84C" strokeWidth="2.2" strokeLinecap="round" />
-  </svg>
+  <img src="/src/IMG_9171.jpeg" alt="Human Ark" style={{ width: "70px", height: "auto" }} />
 );
 
 const steps = [
@@ -49,38 +28,14 @@ function ChipsField({ field, value, onChange }) {
   const selected = Array.isArray(value) ? value : [];
   const hasOther = selected.includes("Other");
   const otherValue = selected.find(s => s !== "Other" && !field.options.includes(s)) || "";
-
-  const toggle = (opt) => {
-    if (opt === "Other") {
-      onChange(hasOther ? selected.filter(s => s !== "Other" && field.options.includes(s)) : [...selected.filter(s => field.options.includes(s)), "Other"]);
-      return;
-    }
-    onChange(selected.includes(opt) ? selected.filter(s => s !== opt) : [...selected.filter(s => s !== "Other" && !field.options.includes(s) ? false : true), opt]);
-  };
-
-  const handleOtherText = (e) => {
-    const text = e.target.value;
-    const withoutOtherText = selected.filter(s => field.options.includes(s) || s === "Other");
-    if (text) {
-      onChange([...withoutOtherText.filter(s => s !== "Other"), "Other", text]);
-    } else {
-      onChange([...withoutOtherText]);
-    }
-  };
-
+  const toggle = (opt) => { if (opt === "Other") { onChange(hasOther ? selected.filter(s => s !== "Other" && field.options.includes(s)) : [...selected.filter(s => field.options.includes(s)), "Other"]); return; } onChange(selected.includes(opt) ? selected.filter(s => s !== opt) : [...selected, opt]); };
+  const handleOtherText = (e) => { const text = e.target.value; const base = selected.filter(s => field.options.includes(s) || s === "Other"); if (text) { onChange([...base.filter(s => s !== "Other"), "Other", text]); } else { onChange([...base]); } };
   return (
     <div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "12px" }}>
-        {field.options.map((opt) => {
-          const active = opt === "Other" ? hasOther : selected.includes(opt);
-          return (
-            <button key={opt} onClick={() => toggle(opt)} style={{ padding: "10px 20px", borderRadius: "3px", border: "1px solid " + (active ? GOLD : "rgba(201,168,76,0.3)"), background: active ? GOLD : "transparent", color: active ? "white" : NAVY, fontFamily: "'Cormorant Garamond', serif", fontSize: "15px", cursor: "pointer", transition: "all 0.2s", letterSpacing: "0.04em" }}>{opt}</button>
-          );
-        })}
+        {field.options.map((opt) => { const active = opt === "Other" ? hasOther : selected.includes(opt); return ( <button key={opt} onClick={() => toggle(opt)} style={{ padding: "10px 20px", borderRadius: "3px", border: "1px solid " + (active ? GOLD : "rgba(201,168,76,0.3)"), background: active ? GOLD : "transparent", color: active ? "white" : NAVY, fontFamily: "'Cormorant Garamond', serif", fontSize: "15px", cursor: "pointer", transition: "all 0.2s", letterSpacing: "0.04em" }}>{opt}</button> ); })}
       </div>
-      {hasOther && field.allowOther && (
-        <input type="text" placeholder="Please specify..." value={otherValue} onChange={handleOtherText} onClick={(e) => e.stopPropagation()} style={{ ...inputStyle, marginTop: "4px" }} autoFocus />
-      )}
+      {hasOther && field.allowOther && ( <input type="text" placeholder="Please specify..." value={otherValue} onChange={handleOtherText} style={{ ...inputStyle, marginTop: "4px" }} autoFocus /> )}
     </div>
   );
 }
@@ -88,15 +43,7 @@ function ChipsField({ field, value, onChange }) {
 function RadioField({ field, value, onChange }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      {field.options.map((opt) => {
-        const active = value === opt;
-        return (
-          <button key={opt} onClick={() => onChange(opt)} style={{ display: "flex", alignItems: "center", gap: "14px", padding: "13px 18px", borderRadius: "4px", border: "1px solid " + (active ? GOLD : "rgba(201,168,76,0.3)"), background: active ? "rgba(201,168,76,0.08)" : "white", color: NAVY, fontFamily: "'Cormorant Garamond', serif", fontSize: "16px", fontWeight: active ? "600" : "400", cursor: "pointer", transition: "all 0.2s", textAlign: "left" }}>
-            <span style={{ width: "16px", height: "16px", borderRadius: "50%", flexShrink: 0, border: "2px solid " + (active ? GOLD : "rgba(201,168,76,0.4)"), background: active ? GOLD : "transparent", transition: "all 0.2s" }} />
-            {opt}
-          </button>
-        );
-      })}
+      {field.options.map((opt) => { const active = value === opt; return ( <button key={opt} onClick={() => onChange(opt)} style={{ display: "flex", alignItems: "center", gap: "14px", padding: "13px 18px", borderRadius: "4px", border: "1px solid " + (active ? GOLD : "rgba(201,168,76,0.3)"), background: active ? "rgba(201,168,76,0.08)" : "white", color: NAVY, fontFamily: "'Cormorant Garamond', serif", fontSize: "16px", fontWeight: active ? "600" : "400", cursor: "pointer", transition: "all 0.2s", textAlign: "left" }}><span style={{ width: "16px", height: "16px", borderRadius: "50%", flexShrink: 0, border: "2px solid " + (active ? GOLD : "rgba(201,168,76,0.4)"), background: active ? GOLD : "transparent", transition: "all 0.2s" }} />{opt}</button> ); })}
     </div>
   );
 }
@@ -108,38 +55,13 @@ export default function HumanArkIntake() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [errors, setErrors] = useState({});
-
   const visibleSteps = steps.filter(s => !s.showIf || s.showIf(formData));
   const step = visibleSteps[current];
   const totalVisible = visibleSteps.length;
-
   const getValue = (name) => { const field = step.fields.find(f => f.name === name); return formData[name] ?? (field?.type === "chips" ? [] : ""); };
   const setValue = (name, val) => { setFormData(prev => ({ ...prev, [name]: val })); if (errors[name]) setErrors(prev => ({ ...prev, [name]: null })); };
-
-  const validate = () => {
-    const newErrors = {};
-    for (const field of step.fields) {
-      if (field.required) {
-        const val = formData[field.name];
-        if (!val || (Array.isArray(val) && val.length === 0) || (typeof val === "string" && val.trim() === "")) newErrors[field.name] = "This field is required.";
-        if (field.type === "email" && val && !/\S+@\S+\.\S+/.test(val)) newErrors[field.name] = "Please enter a valid email address.";
-      }
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async () => {
-    if (!validate()) return;
-    setSubmitting(true); setSubmitError(null);
-    const payload = { "Company": formData.company || "", "Website": formData.website || "-", "What they do": formData.description || "", "Main challenge": Array.isArray(formData.challenge) ? formData.challenge.join(", ") : formData.challenge || "", "Desired outcome": formData.outcome || "", "Role type": Array.isArray(formData.role) ? formData.role.join(", ") : formData.role || "", "Company stage": formData.stage || "", "Timeline": formData.timeline || "", "Budget": formData.budget || "", "Budget range": formData.budget_range || "-", "Contact name": formData.contact_name || "", "Contact role": formData.contact_role || "-", "Contact email": formData.contact_email || "", "_replyto": formData.contact_email || "", "_subject": "New Venture Intake - " + (formData.company || "Unknown") };
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) });
-      if (res.ok) { setSubmitted(true); } else { const data = await res.json(); setSubmitError(data?.errors?.[0]?.message || "Something went wrong."); }
-    } catch (e) { setSubmitError("Network error. Please try again."); }
-    finally { setSubmitting(false); }
-  };
-
+  const validate = () => { const newErrors = {}; for (const field of step.fields) { if (field.required) { const val = formData[field.name]; if (!val || (Array.isArray(val) && val.length === 0) || (typeof val === "string" && val.trim() === "")) newErrors[field.name] = "This field is required."; if (field.type === "email" && val && !/\S+@\S+\.\S+/.test(val)) newErrors[field.name] = "Please enter a valid email address."; } } setErrors(newErrors); return Object.keys(newErrors).length === 0; };
+  const handleSubmit = async () => { if (!validate()) return; setSubmitting(true); setSubmitError(null); const payload = { "Company": formData.company || "", "Website": formData.website || "-", "What they do": formData.description || "", "Main challenge": Array.isArray(formData.challenge) ? formData.challenge.join(", ") : formData.challenge || "", "Desired outcome": formData.outcome || "", "Role type": Array.isArray(formData.role) ? formData.role.join(", ") : formData.role || "", "Company stage": formData.stage || "", "Timeline": formData.timeline || "", "Budget": formData.budget || "", "Budget range": formData.budget_range || "-", "Contact name": formData.contact_name || "", "Contact role": formData.contact_role || "-", "Contact email": formData.contact_email || "", "_replyto": formData.contact_email || "", "_subject": "New Venture Intake - " + (formData.company || "Unknown") }; try { const res = await fetch(FORMSPREE_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) }); if (res.ok) { setSubmitted(true); } else { const data = await res.json(); setSubmitError(data?.errors?.[0]?.message || "Something went wrong."); } } catch (e) { setSubmitError("Network error. Please try again."); } finally { setSubmitting(false); } };
   const next = () => { if (!validate()) return; if (current < totalVisible - 1) { setCurrent(c => c + 1); } else { handleSubmit(); } };
   const back = () => { if (current > 0) setCurrent(c => c - 1); };
   const progress = ((current + 1) / totalVisible) * 100;
