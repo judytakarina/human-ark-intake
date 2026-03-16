@@ -102,7 +102,7 @@ export default function HumanArkIntake() {
           <HumanArkLogo />
           <div>
             <div style={{ fontSize: "17px", fontWeight: "400", color: NAVY, letterSpacing: "0.18em", textTransform: "uppercase" }}></div>
-            <div style={{ fontSize: "11px", color: GOLD, letterSpacing: "0.12em", textTransform: "uppercase" }}>Venture Operator Network</div>
+            <div style={{ fontSize: "11px", color: NAVY, letterSpacing: "0.12em", textTransform: "uppercase" }}>Venture Operator Network</div>
           </div>
         </div>
         <div style={{ fontSize: "12px", color: NAVY + "66", letterSpacing: "0.1em" }}>{current + 1} / {totalVisible}</div>
@@ -112,7 +112,7 @@ export default function HumanArkIntake() {
         <div style={{ maxWidth: "520px", width: "100%" }}>
           <div style={{ display: "flex", gap: "4px", marginBottom: "40px" }}>{visibleSteps.map((s, i) => ( <div key={s.id} style={{ height: "2px", flex: 1, borderRadius: "1px", background: i <= current ? GOLD : "rgba(201,168,76,0.2)", transition: "background 0.3s" }} /> ))}</div>
           <div style={{ width: "28px", height: "2px", background: GOLD, marginBottom: "20px" }} />
-          <div style={{ fontSize: "11px", letterSpacing: "0.16em", color: GOLD, textTransform: "uppercase", marginBottom: "12px" }}>Question {current + 1}</div>
+          <div style={{ fontSize: "11px", letterSpacing: "0.16em", color: NAVY, textTransform: "uppercase", marginBottom: "12px" }}>Question {current + 1}</div>
           <h2 style={{ fontSize: "28px", fontWeight: "400", color: NAVY, margin: "0 0 8px", lineHeight: 1.2, letterSpacing: "0.01em" }}>{step.question}</h2>
           {step.subtitle && <p style={{ fontSize: "15px", color: GOLD, margin: "0 0 28px", lineHeight: 1.6, fontStyle: "italic" }}>{step.subtitle}</p>}
           {!step.subtitle && <div style={{ marginBottom: "28px" }} />}
