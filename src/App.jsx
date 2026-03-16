@@ -41,7 +41,7 @@ function ChipsField({ field, value, onChange }) {
 }
 
 function RadioField({ field, value, onChange }) {
-  const otherActive = field.allowOther && value && !field.options.filter(o => o !== "Other").includes(value);
+  const otherActive = value === "Other";
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
       {field.options.map((opt) => {
