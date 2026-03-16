@@ -6,7 +6,7 @@ const GOLD = "#C9A84C";
 const CREAM = "#FAF7F2";
 
 const HumanArkLogo = () => (
-    <img src="/IMG_0004.jpeg" alt="Human Ark" style={{ width: "120px", height: "auto" }} />
+    <img src="/IMG_0005.jpeg" alt="Human Ark" style={{ width: "120px", height: "auto" }} />
 );
 
 const steps = [
