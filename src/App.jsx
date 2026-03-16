@@ -41,24 +41,23 @@ function ChipsField({ field, value, onChange }) {
 }
 
 function RadioField({ field, value, onChange }) {
-  const isOther = field.options.includes(value) ? value === "Other" : (value !== "" && value !== undefined && value !== null);
-  const otherText = field.options.includes(value) ? "" : (value || "");
-  const handleOptionClick = (opt) => { onChange(opt === "Other" ? "__OTHER__" : opt); };
-  const handleOtherText = (e) => { e.stopPropagation() ; onChange(e.target.value === "" ? "__OTHER__" : e.target.value); };
+  const otherActive = value === "Other";
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
       {field.options.map((opt) => {
-        const active = opt === "Other" ? isOther : value === opt;
+        const active = value === opt || (opt === "Other" && otherActive);
         return (
-          <button key={opt} onClick={() => handleOptionClick(opt)} style={{ display: "flex", alignItems: "center", gap: "14px", padding: "13px 18px", borderRadius: "4px", border: "1px solid " + (active ? GOLD : "rgba(201,168,76,0.3)"), background: active ? "rgba(201,168,76,0.08)" : "white", fontFamily: "'Cormorant Garamond', serif", fontSize: "16px", color: "#0B1F3A", cursor: "pointer" }}>
-            <span style={{ width: "16px", height: "16px", borderRadius: "50%", border: "2px solid #C9A84C", background: active ? "#C9A84C" : "transparent", display: "block", flexShrink: 0 }} />{opt}
+          <button key={opt} onClick={() => onChange(opt)} style={{ display: "flex", alignItems: "center", gap: "14px", padding: "13px 18px", borderRadius: "4px", border: "1px solid " + (active ? GOLD : "rgba(201,168,76,0.3)"), background: active ? "rgba(201,168,76,0.08)" : "white", fontFamily: "'Cormorant Garamond', serif", fontSize: "16px", color: "#0B1F3A", cursor: "pointer" }}>
+<span style={{width:"16px",height:"16px",borderRadius:"50%",border:"2px solid #C9A84C",marginRight:"12px",background:active?"#C9A84C":"transparent",display:"block",flexShrink:0}} />{opt}
+
           </button>
         );
       })}
-      
+      {value === "Other" ? (
+        <input type="text" placeholder="Please describe..." value={value === "Other" ? "" : value} onChange={(e) => onChange(e.target.value)} style={{ ...inputStyle, marginTop: "4px" }} />
+      ) : null}
     </div>
   );
-}
 }
 
 export default function HumanArkIntake() {
