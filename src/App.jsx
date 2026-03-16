@@ -41,9 +41,20 @@ function ChipsField({ field, value, onChange }) {
 }
 
 function RadioField({ field, value, onChange }) {
+  const otherActive = field.allowOther && value && !field.options.filter(o => o !== "Other").includes(value);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      {field.options.map((opt) => { const active = value === opt; return ( <button key={opt} onClick={() => onChange(opt)} style={{ display: "flex", alignItems: "center", gap: "14px", padding: "13px 18px", borderRadius: "4px", border: "1px solid " + (active ? GOLD : "rgba(201,168,76,0.3)"), background: active ? "rgba(201,168,76,0.08)" : "white", color: NAVY, fontFamily: "'Cormorant Garamond', serif", fontSize: "16px", fontWeight: active ? "600" : "400", cursor: "pointer", transition: "all 0.2s", textAlign: "left" }}><span style={{ width: "16px", height: "16px", borderRadius: "50%", flexShrink: 0, border: "2px solid " + (active ? GOLD : "rgba(201,168,76,0.4)"), background: active ? GOLD : "transparent", transition: "all 0.2s" }} />{opt}</button> ); })}
+      {field.options.map((opt) => {
+        const active = value === opt || (opt === "Other" && otherActive);
+        return (
+          <button key={opt} onClick={() => onChange(opt)} style={{ display: "flex", alignItems: "center", gap: "14px", padding: "13px 18px", borderRadius: "4px", border: "1px solid " + (active ? GOLD : "rgba(201,168,76,0.3)"), background: active ? "rgba(201,168,76,0.08)" : "white", fontFamily: "'Cormorant Garamond', serif", fontSize: "16px", color: "#0B1F3A", cursor: "pointer" }}>
+            {opt}
+          </button>
+        );
+      })}
+      {otherActive || value === "Other" ? (
+        <input type="text" placeholder="Please describe..." value={value === "Other" ? "" : value} onChange={(e) => onChange(e.target.value)} style={{ ...inputStyle, marginTop: "4px" }} autoFocus />
+      ) : null}
     </div>
   );
 }
