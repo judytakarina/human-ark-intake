@@ -55,9 +55,7 @@ function RadioField({ field, value, onChange }) {
           </button>
         );
       })}
-      {field.allowOther && isOther && (
-        <input type="text" placeholder="Please describe..." value={otherText} onChange={handleOtherText} style={{ ...inputStyle, marginTop: "4px" }} />
-      )}
+      
     </div>
   );
 }
