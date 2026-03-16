@@ -44,7 +44,7 @@ function RadioField({ field, value, onChange }) {
   const isOther = field.options.includes(value) ? value === "Other" : (value !== "" && value !== undefined && value !== null);
   const otherText = field.options.includes(value) ? "" : (value || "");
   const handleOptionClick = (opt) => { onChange(opt === "Other" ? "__OTHER__" : opt); };
-  const handleOtherText = (e) => { onChange(e.target.value === "" ? "__OTHER__" : e.target.value); };
+  const handleOtherText = (e) => { e.stopPropagation() ; onChange(e.target.value === "" ? "__OTHER__" : e.target.value); };
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
       {field.options.map((opt) => {
