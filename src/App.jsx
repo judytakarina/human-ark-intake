@@ -48,7 +48,8 @@ function RadioField({ field, value, onChange }) {
         const active = value === opt || (opt === "Other" && otherActive);
         return (
           <button key={opt} onClick={() => onChange(opt)} style={{ display: "flex", alignItems: "center", gap: "14px", padding: "13px 18px", borderRadius: "4px", border: "1px solid " + (active ? GOLD : "rgba(201,168,76,0.3)"), background: active ? "rgba(201,168,76,0.08)" : "white", fontFamily: "'Cormorant Garamond', serif", fontSize: "16px", color: "#0B1F3A", cursor: "pointer" }}>
-            {opt}
+<span style={{width:"16px",height:"16px",borderRadius:"50%",border:"2px solid #C9A84C",marginRight:"12px",background:active?"#C9A84C":"transparent",display:"block",flexShrink:0}} />{opt}
+
           </button>
         );
       })}
