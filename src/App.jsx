@@ -53,8 +53,8 @@ function RadioField({ field, value, onChange }) {
           </button>
         );
       })}
-      {otherActive || value === "Other" ? (
-        <input type="text" placeholder="Please describe..." value={value === "Other" ? "" : value} onChange={(e) => onChange(e.target.value)} style={{ ...inputStyle, marginTop: "4px" }} autoFocus />
+      {value === "Other" ? (
+        <input type="text" placeholder="Please describe..." value={value === "Other" ? "" : value} onChange={(e) => onChange(e.target.value)} style={{ ...inputStyle, marginTop: "4px" }} />
       ) : null}
     </div>
   );
